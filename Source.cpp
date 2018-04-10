@@ -29,15 +29,17 @@ const char* dash4 = "----";
 
 class Launch {
 private:
-
+	bool chosen = 0;
+	int c = 0; //stores the keyboard input as int
+	int selection = 1; //indicates which menu atribute you have selected
 public:
 	std::string Print() {}
 	std::string Booting() {}
-	bool MenuDisplay() {
+	int MenuDisplay() {
 		using namespace std;
 
 
-		
+
 
 
 		// best reference http://www.lagmonster.org/docs/DOS7/v-ansi-keys.html
@@ -45,19 +47,18 @@ public:
 		// unicode/ascii characters https://stackoverflow.com/a/16510089
 		//list of characters https://msdn.microsoft.com/en-us/library/6aw8xdf2.aspx
 
-		int c = 0;
-		int selection = 1;
-		while (1)
+
+		while (chosen == 0)
 		{
-			
+
 			if (selection < 1) {
 				selection = 4;
 			}
 			if (selection > 4) {
 				selection = 1;
 			}
-			
 
+			//MENU slides
 			switch (selection) {
 
 			case 1:
@@ -123,13 +124,16 @@ public:
 			default:
 				break;
 			}
-
+			//if (chosen == 1) {
+			//			return selection;
+			//		}
 			c = 0;
-			//system("Color 04");
+			//keyboard input switch to cycle through MENU
 			switch ((c = getch())) { //get char using conio header
 			case KEY_ENTER:
 				//cout << endl << "Enter" << endl;
-				return false;
+				chosen = 1;
+				return selection;
 				break;
 			case KEY_UP:
 				//cout << endl << "Up" << endl;//key up
@@ -149,6 +153,7 @@ public:
 				//cout << endl << "null" << endl;  // not arrow
 				break;
 			}
+
 		}
 
 
@@ -169,8 +174,8 @@ private:
 public:
 	std::string Name;
 	std::string Password;
-	void store(){
-		
+	void store() {
+
 		std::cout << "greetings user enter details" << std::endl;;
 		std::cout << "greetings user enter Name :";
 		std::cin >> Name;
@@ -178,8 +183,8 @@ public:
 		std::cin >> Password;
 
 	}
-	std::string retrieve(){}
-	std::string todoList(){}
+	std::string retrieve() {}
+	std::string todoList() {}
 	std::string greetings() {}
 	std::string password() {}
 
@@ -192,19 +197,35 @@ public:
 //Password retrieval
 
 void main() {
+	system("Color 04");
 	Launch OS;
 	//Employee user;
-//	OS.Booting;
+	//	OS.Booting;
 	int menu = 1;
 	bool select = false;
 	do {
 		menu = OS.MenuDisplay();//.Pos();
-		select = OS.MenuDisplay();//.Select();
-	} while (select = true);
-	
-	
 
-// user.store();
+		switch (menu) {
+		case 1:
+			std::cout << "you picked Start" << std::endl;
+			break;
+		case 2:
+			std::cout << "you picked Options" << std::endl;
+			break;
+		case 3:
+			std::cout << "you picked credits" << std::endl;
+			break;
+		case 4:
+			std::cout << "you picked Exit" << std::endl;
+			break;
+		}
+		system("pause");
+	} while (select == true);
+
+
+
+	// user.store();
 
 
 
